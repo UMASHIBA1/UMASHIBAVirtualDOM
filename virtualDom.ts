@@ -2,8 +2,10 @@ type RECYCLED_NODE = 1;
 type TEXT_NODE = 3;
 
 // propにはkeyとoninputやclass、id等のHTMLElementもしくはSVGElementの属性の名前が入ります
+
+type KeyAttribute = string | number | null | undefined;
 interface DOMAttributes {
-  key?: string | number | null;
+  key: KeyAttribute;
   [prop: string]: any;
 }
 
