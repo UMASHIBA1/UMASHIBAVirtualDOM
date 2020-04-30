@@ -40,3 +40,10 @@ const createVNode = (
     key,
   };
 };
+
+const createTextVNode = (
+  name: string,
+  realNode: VirtualDOMType["realNode"]
+) => {
+  return createVNode(name, {}, [], realNode, TEXT_NODE, null);
+};
