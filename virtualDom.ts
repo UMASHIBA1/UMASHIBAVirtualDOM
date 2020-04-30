@@ -16,7 +16,7 @@ interface VirtualNodeType {
   props: DOMAttributes;
   children: (VirtualNodeType | string)[];
   realNode: ElementAttachedVNode | null;
-  nodeType: RECYCLED_NODE | TEXT_NODE;
+  nodeType: RECYCLED_NODE | TEXT_NODE | null;
   key: KeyAttribute;
 }
 
