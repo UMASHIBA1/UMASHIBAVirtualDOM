@@ -12,7 +12,7 @@ interface DOMAttributes {
 type ElementAttachedVDOM = Element & { vdom: VirtualDOMType };
 
 interface VirtualDOMType {
-  name: ElementTagNameMap;
+  name: ElementTagNameMap | string;
   props: DOMAttributes;
   children: (VirtualDOMType | string)[];
   realNode: Element;
