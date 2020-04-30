@@ -1,8 +1,9 @@
 type RECYCLED_NODE = 1;
 type TEXT_NODE = 3;
 
-// propにはoninputやclass、id等のHTMLElementもしくはSVGElementの属性の名前が入ります
+// propにはkeyとoninputやclass、id等のHTMLElementもしくはSVGElementの属性の名前が入ります
 interface DOMAttributes {
+  key?: string | number | null;
   [prop: string]: any;
 }
 
@@ -13,6 +14,5 @@ interface VirtualDOMType {
   props: DOMAttributes;
   children: (VirtualDOMType | string)[];
   realNode: Element;
-  key?: string | number | null;
   nodeType?: RECYCLED_NODE | TEXT_NODE;
 }
