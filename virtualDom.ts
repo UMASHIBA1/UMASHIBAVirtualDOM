@@ -27,17 +27,17 @@ const createVNode = (
   name: VirtualNodeType["name"],
   props: VirtualNodeType["props"],
   children: VirtualNodeType["children"],
-  realNode: VirtualNodeType["realNode"],
-  nodeType: VirtualNodeType["nodeType"],
-  key: KeyAttribute
+  realNode?: VirtualNodeType["realNode"],
+  nodeType?: VirtualNodeType["nodeType"],
+  key?: KeyAttribute
 ): VirtualNodeType => {
   return {
     name,
     props,
     children,
-    realNode,
-    nodeType,
-    key,
+    realNode: realNode === undefined ? null : realNode,
+    nodeType: nodeType === undefined ? null : nodeType,
+    key: key === undefined ? null : key,
   };
 };
 
