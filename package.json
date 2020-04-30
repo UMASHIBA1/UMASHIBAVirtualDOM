@@ -1,0 +1,20 @@
+{
+  "name": "umashiba-virtual-dom",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "https://github.com/UMASHIBA1/UMASHIBAVirtualDOM.git",
+  "author": "UMASHIBA <umashiba1@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^4.2.1",
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
