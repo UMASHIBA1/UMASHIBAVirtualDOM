@@ -1,4 +1,3 @@
-type RECYCLED_NODE = 1;
 type TEXT_NODE = 3;
 
 type KeyAttribute = string | number | null;
@@ -16,12 +15,11 @@ interface VirtualNodeType {
   props: DOMAttributes;
   children: (VirtualNodeType | string)[];
   realNode: ElementAttachedVNode | null;
-  nodeType: RECYCLED_NODE | TEXT_NODE | null;
+  nodeType: TEXT_NODE | null;
   key: KeyAttribute;
 }
 
 const TEXT_NODE = 3;
-const RECYCLED_NODE = 1;
 
 const createVNode = (
   name: VirtualNodeType["name"],
