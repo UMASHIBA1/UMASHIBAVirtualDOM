@@ -9,13 +9,13 @@ interface DOMAttributes {
   [prop: string]: any;
 }
 
-type ElementAttachedVDOM = Element & { vdom: VirtualDOMType };
+type ElementAttachedVNode = Element & { vdom: VirtualDOMType };
 
 interface VirtualDOMType {
   name: ElementTagNameMap | string;
   props: DOMAttributes;
   children: (VirtualDOMType | string)[];
-  realNode: Element;
+  realNode?: ElementAttachedVNode;
   nodeType?: RECYCLED_NODE | TEXT_NODE;
   key: KeyAttribute;
 }
