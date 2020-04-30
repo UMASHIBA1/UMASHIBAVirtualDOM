@@ -43,7 +43,7 @@ const createVNode = (
 
 const createTextVNode = (
   name: string,
-  realNode: VirtualNodeType["realNode"]
+  realNode?: VirtualNodeType["realNode"]
 ) => {
-  return createVNode(name, {}, [], realNode, TEXT_NODE, null);
+  return createVNode(name, {}, [], realNode, TEXT_NODE);
 };
