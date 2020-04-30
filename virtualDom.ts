@@ -46,7 +46,7 @@ const createTextVNode = (
   return createVNode(name, {}, [], realNode, TEXT_NODE);
 };
 
-const h = (
+export const h = (
   name: VirtualNodeType["name"],
   props: VirtualNodeType["props"],
   children: VirtualNodeType["children"],
