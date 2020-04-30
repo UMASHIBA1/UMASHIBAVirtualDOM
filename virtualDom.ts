@@ -9,12 +9,12 @@ interface DOMAttributes {
   [prop: string]: any;
 }
 
-type ElementAttachedVNode = Element & { vdom: VirtualDOMType };
+type ElementAttachedVNode = Element & { vdom: VirtualNodeType };
 
-interface VirtualDOMType {
+interface VirtualNodeType {
   name: ElementTagNameMap | string;
   props: DOMAttributes;
-  children: (VirtualDOMType | string)[];
+  children: (VirtualNodeType | string)[];
   realNode?: ElementAttachedVNode;
   nodeType?: RECYCLED_NODE | TEXT_NODE;
   key: KeyAttribute;
@@ -24,13 +24,13 @@ const TEXT_NODE = 3;
 const RECYCLED_NODE = 1;
 
 const createVNode = (
-  name: VirtualDOMType["name"],
-  props: VirtualDOMType["props"],
-  children: VirtualDOMType["children"],
-  realNode: VirtualDOMType["realNode"],
-  nodeType: VirtualDOMType["nodeType"],
+  name: VirtualNodeType["name"],
+  props: VirtualNodeType["props"],
+  children: VirtualNodeType["children"],
+  realNode: VirtualNodeType["realNode"],
+  nodeType: VirtualNodeType["nodeType"],
   key: KeyAttribute
-): VirtualDOMType => {
+): VirtualNodeType => {
   return {
     name,
     props,
@@ -43,7 +43,7 @@ const createVNode = (
 
 const createTextVNode = (
   name: string,
-  realNode: VirtualDOMType["realNode"]
+  realNode: VirtualNodeType["realNode"]
 ) => {
   return createVNode(name, {}, [], realNode, TEXT_NODE, null);
 };
