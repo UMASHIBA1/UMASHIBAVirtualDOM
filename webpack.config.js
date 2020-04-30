@@ -1,6 +1,6 @@
 const path = require("path");
 const outputPath = path.resolve(__dirname, "public");
-const HtmlWebpackPlugin = require("html-webpack-plugin"); //ここを追加
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
