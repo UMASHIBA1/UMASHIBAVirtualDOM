@@ -20,6 +20,9 @@ interface VirtualDOMType {
   key: KeyAttribute;
 }
 
+const TEXT_NODE = 3;
+const RECYCLED_NODE = 1;
+
 const createVNode = (
   name: VirtualDOMType["name"],
   props: VirtualDOMType["props"],
