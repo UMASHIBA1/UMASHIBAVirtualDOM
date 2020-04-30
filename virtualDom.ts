@@ -47,3 +47,31 @@ const createTextVNode = (
 ) => {
   return createVNode(name, {}, [], realNode, TEXT_NODE);
 };
+
+const h = (
+  name: VirtualNodeType["name"],
+  props: VirtualNodeType["props"],
+  children: VirtualNodeType["children"],
+  realNode?: VirtualNodeType["realNode"]
+) => {
+  const VNodeChildren: VirtualNodeType[] = [];
+  for (const child of children) {
+    if (typeof child === "string") {
+      const textVNode = createTextVNode(child);
+      VNodeChildren.push(textVNode);
+    } else {
+      VNodeChildren.push(child);
+    }
+  }
+
+  const thisVNode = createVNode(
+    name,
+    props,
+    VNodeChildren,
+    realNode,
+    null,
+    props.key
+  );
+
+  return thisVNode;
+};
