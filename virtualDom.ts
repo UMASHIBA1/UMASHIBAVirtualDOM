@@ -19,11 +19,13 @@ type ElementAttachedNeedAttr = Element & {
   eventHandlers?: HandlersType; //handlersにイベントを入れておいてoninput等のイベントを管理する
 };
 
+type ExpandElement = ElementAttachedNeedAttr | Text;
+
 interface VirtualNodeType {
   name: ElementTagNameMap | string;
   props: DOMAttributes;
   children: VirtualNodeType[];
-  realNode: ElementAttachedNeedAttr | null;
+  realNode: ExpandElement | null;
   nodeType: TEXT_NODE | null;
   key: KeyAttribute;
 }
