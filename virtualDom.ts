@@ -46,6 +46,32 @@ const createTextVNode = (
   return createVNode(name, {}, [], realNode, TEXT_NODE);
 };
 
+// 初期render時に本物のElementからVNodeを作成するための関数
+const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
+  if (realElement.nodeType === TEXT_NODE) {
+    return createTextVNode(realElement.nodeName, realElement);
+  } else {
+    const VNodeChildren: VirtualNodeType[] = [];
+    const childrenLength = realElement.childNodes.length;
+    for (let i = 0; i < childrenLength; i++) {
+      const child = realElement.children.item(i);
+      if (child !== null) {
+        const childVNode = createVNodeFromRealElement(child);
+        VNodeChildren.push(childVNode);
+      }
+    }
+
+    const VNode = createVNode(
+      realElement.nodeName.toLowerCase(),
+      {},
+      VNodeChildren,
+      realElement,
+      null
+    );
+    return VNode;
+  }
+};
+
 const renderNode = (
   parentNode: Element,
   realNode: VirtualNodeType["realNode"],
