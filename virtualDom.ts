@@ -81,6 +81,15 @@ const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
   }
 };
 
+// NOTE ElementAttachedNeedAttr.handlersに存在する関数を呼びだすだけの関数
+// イベント追加時にこれをaddEventListenerする事でイベント変更時にElementAttachedNeedAttr.handlersの関数を変えるだけで良い
+const listenerFunc = (event: Event) => {
+  const realNode = event.currentTarget as ElementAttachedNeedAttr;
+  if (realNode.eventHandlers !== undefined) {
+    realNode.eventHandlers[event.type](event);
+  }
+};
+
 const renderTextNode = (
   realNode: VirtualNodeType["realNode"],
   newVNode: VirtualNodeType
