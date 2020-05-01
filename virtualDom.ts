@@ -16,7 +16,7 @@ interface HandlersType {
 
 type ElementAttachedNeedAttr = Element & {
   vdom?: VirtualNodeType;
-  handlers?: HandlersType;
+  eventHandlers?: HandlersType; //handlersにイベントを入れておいてoninput等のイベントを管理する
 };
 
 interface VirtualNodeType {
