@@ -121,11 +121,7 @@ const patchProperty = (
     }
   }
   // 属性を削除する場合
-  else if (
-    newPropValue === null ||
-    newPropValue === undefined ||
-    newPropValue === false
-  ) {
+  else if (newPropValue === null || newPropValue === undefined) {
     realNode.removeAttribute(propName);
   } else {
     realNode.setAttribute(propName, newPropValue);
