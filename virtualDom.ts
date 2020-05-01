@@ -8,7 +8,7 @@ interface DOMAttributes {
   [prop: string]: any;
 }
 
-type ElementAttachedVNode = Element & { vdom: VirtualNodeType };
+type ElementAttachedVNode = Element & { vdom?: VirtualNodeType };
 
 interface VirtualNodeType {
   name: ElementTagNameMap | string;
