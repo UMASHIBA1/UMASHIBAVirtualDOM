@@ -77,7 +77,10 @@ const renderNode = (
   realNode: VirtualNodeType["realNode"],
   oldVNode: VirtualNodeType,
   newVNode: VirtualNodeType
-) => {};
+) => {
+  if (newVNode === oldVNode) {
+  }
+};
 
 export const render = (
   realNode: ElementAttachedVNode,
