@@ -72,6 +72,25 @@ const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
   }
 };
 
+const renderTextNode = (
+  realNode: VirtualNodeType["realNode"],
+  newVNode: VirtualNodeType
+) => {
+  if (realNode !== null) {
+    if (typeof newVNode.name === "string") {
+      realNode.nodeValue = newVNode.name;
+    } else {
+      console.error(
+        "Error! renderNode does not work, because rendering nodeType is TEXT_NODE, but newNode.name is not string."
+      );
+    }
+  } else {
+    console.error(
+      "Error! renderNode does not work, because redering nodeType is TEXT_NODE, but realNode is null. can't add text to node"
+    );
+  }
+};
+
 const renderNode = (
   parentNode: Element,
   realNode: VirtualNodeType["realNode"],
