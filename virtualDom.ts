@@ -94,11 +94,12 @@ const renderTextNode = (
 const renderNode = (
   parentNode: Element,
   realNode: VirtualNodeType["realNode"],
-  oldVNode: VirtualNodeType,
+  oldVNode: VirtualNodeType | null,
   newVNode: VirtualNodeType
 ) => {
   if (newVNode === oldVNode) {
   } else if (
+    oldVNode !== null &&
     newVNode.nodeType === TEXT_NODE &&
     oldVNode.nodeType === TEXT_NODE
   ) {
