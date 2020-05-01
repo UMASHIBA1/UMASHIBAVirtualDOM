@@ -75,7 +75,7 @@ const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
 const renderNode = (
   parentNode: Element,
   realNode: VirtualNodeType["realNode"],
-  oldVNode: VirtualNodeType | null,
+  oldVNode: VirtualNodeType,
   newVNode: VirtualNodeType
 ) => {};
 
