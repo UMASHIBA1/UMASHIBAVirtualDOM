@@ -195,6 +195,17 @@ const renderNode = (
   ) {
     realNode = renderTextNode(realNode, newVNode);
   }
+  // 要素の追加、削除、もしくは<div>から<span>等、要素自体を変えた時の入れ替え処理
+  else if (oldVNode === null || oldVNode.name !== newVNode.name) {
+    const newRealNode = createRealNodeFromVNode(newVNode);
+    if (newRealNode !== null) {
+      realNode = parentNode.insertBefore(newRealNode, realNode);
+    }
+
+    if (oldVNode !== null && oldVNode.realNode !== null) {
+      parentNode.removeChild(oldVNode.realNode);
+    }
+  }
 };
 
 export const render = (
