@@ -9,13 +9,21 @@ interface DOMAttributes {
   [prop: string]: any;
 }
 
-type ElementAttachedVNode = Element & { vdom?: VirtualNodeType };
+// eventNameはinputやsubmit,click等のoninput等のon以降の文字の小文字が入る
+interface HandlersType {
+  [eventName: string]: (event: Event) => void;
+}
+
+type ElementAttachedNeedAttr = Element & {
+  vdom?: VirtualNodeType;
+  handlers?: HandlersType;
+};
 
 interface VirtualNodeType {
   name: ElementTagNameMap | string;
   props: DOMAttributes;
   children: (VirtualNodeType | string)[];
-  realNode: ElementAttachedVNode | null;
+  realNode: ElementAttachedNeedAttr | null;
   nodeType: TEXT_NODE | null;
   key: KeyAttribute;
 }
@@ -112,7 +120,7 @@ const renderNode = (
 };
 
 export const render = (
-  realNode: ElementAttachedVNode,
+  realNode: ElementAttachedNeedAttr,
   newVNode: VirtualNodeType
 ) => {
   if (realNode.parentElement !== null) {
