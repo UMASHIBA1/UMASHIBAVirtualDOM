@@ -79,15 +79,18 @@ const renderTextNode = (
   if (realNode !== null) {
     if (typeof newVNode.name === "string") {
       realNode.nodeValue = newVNode.name;
+      return realNode;
     } else {
       console.error(
         "Error! renderNode does not work, because rendering nodeType is TEXT_NODE, but newNode.name is not string."
       );
+      return realNode;
     }
   } else {
     console.error(
       "Error! renderNode does not work, because redering nodeType is TEXT_NODE, but realNode is null. can't add text to node"
     );
+    return realNode;
   }
 };
 
@@ -103,7 +106,7 @@ const renderNode = (
     newVNode.nodeType === TEXT_NODE &&
     oldVNode.nodeType === TEXT_NODE
   ) {
-    renderTextNode(realNode, newVNode);
+    realNode = renderTextNode(realNode, newVNode);
   }
 };
 
