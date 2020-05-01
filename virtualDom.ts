@@ -22,7 +22,7 @@ type ElementAttachedNeedAttr = Element & {
 interface VirtualNodeType {
   name: ElementTagNameMap | string;
   props: DOMAttributes;
-  children: (VirtualNodeType | string)[];
+  children: VirtualNodeType[];
   realNode: ElementAttachedNeedAttr | null;
   nodeType: TEXT_NODE | null;
   key: KeyAttribute;
