@@ -47,7 +47,7 @@ const createTextVNode = (
 };
 
 const renderNode = (
-  parentNode: Node,
+  parentNode: Element,
   realNode: VirtualNodeType["realNode"],
   oldVNode: VirtualNodeType | null,
   newVNode: VirtualNodeType
@@ -57,9 +57,9 @@ export const render = (
   realNode: ElementAttachedVNode,
   newVNode: VirtualNodeType
 ) => {
-  if (realNode.parentNode !== null) {
+  if (realNode.parentElement !== null) {
     const oldVNode = realNode.vdom !== undefined ? realNode.vdom : null;
-    renderNode(realNode.parentNode, realNode, oldVNode, newVNode);
+    renderNode(realNode.parentElement, realNode, oldVNode, newVNode);
   } else {
     console.error(
       "Error! render does not work, because the realNode does not have parentNode attribute."
