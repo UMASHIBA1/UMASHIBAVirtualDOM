@@ -53,6 +53,20 @@ const renderNode = (
   newVNode: VirtualNodeType
 ) => {};
 
+export const render = (
+  realNode: ElementAttachedVNode,
+  newVNode: VirtualNodeType
+) => {
+  if (realNode.parentNode !== null) {
+    const oldVNode = realNode.vdom !== undefined ? realNode.vdom : null;
+    renderNode(realNode.parentNode, realNode, oldVNode, newVNode);
+  } else {
+    console.error(
+      "Error! render does not work, because the realNode does not have parentNode attribute."
+    );
+  }
+};
+
 export const h = (
   name: VirtualNodeType["name"],
   props: VirtualNodeType["props"],
