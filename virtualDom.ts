@@ -2,6 +2,7 @@ type TEXT_NODE = 3;
 
 type KeyAttribute = string | number | null;
 
+type DOMAttributeName = "key" | string;
 // propにはkeyとoninputやclass、id等のHTMLElementもしくはSVGElementの属性の名前が入ります
 interface DOMAttributes {
   key?: KeyAttribute;
