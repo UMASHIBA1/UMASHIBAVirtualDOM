@@ -98,6 +98,11 @@ const renderNode = (
   newVNode: VirtualNodeType
 ) => {
   if (newVNode === oldVNode) {
+  } else if (
+    newVNode.nodeType === TEXT_NODE &&
+    oldVNode.nodeType === TEXT_NODE
+  ) {
+    renderTextNode(realNode, newVNode);
   }
 };
 
