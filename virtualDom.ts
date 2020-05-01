@@ -83,6 +83,20 @@ const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
   }
 };
 
+const mergeProperties = (oldProps: DOMAttributes, newProp: DOMAttributes) => {
+  const mergedProperties: DOMAttributes = {};
+
+  for (const propName in oldProps) {
+    mergedProperties[propName] = oldProps[propName];
+  }
+
+  for (const propName in newProp) {
+    mergedProperties[propName] = newProp[propName];
+  }
+
+  return mergedProperties;
+};
+
 // NOTE ElementAttachedNeedAttr.handlersに存在する関数を呼びだすだけの関数
 // イベント追加時にこれをaddEventListenerする事でイベント変更時にElementAttachedNeedAttr.handlersの関数を変えるだけで良い
 const listenerFunc = (event: Event) => {
