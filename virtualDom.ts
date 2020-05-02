@@ -273,7 +273,7 @@ const renderNode = (
       }
     });
     // 同じく子要素の追加や削除処理の為に必要な為作成
-    const existNewChildren: { [key in KeyAttribute]: "existFlag" } = {};
+    const existNewChildren: { [key in KeyAttribute]: "isExist" } = {};
 
     while (newChildNowIndex <= newChildrenlength) {
       const oldChildVNode = oldVNode.children[oldChildNowIndex];
