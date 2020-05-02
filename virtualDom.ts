@@ -307,20 +307,13 @@ const renderNode = (
         // 以前のrender時とkeyが変わっていなかった場合、更新
         if (oldKey === newKey) {
           const childRealNode = oldChildVNode.realNode;
-          if (realNode !== null) {
-            renderNode(
-              realNode as ElementAttachedNeedAttr,
-              childRealNode,
-              oldChildVNode,
-              newChildVNode
-            );
-          } else {
-            console.error(
-              `Error! renderNode does not work well and failed process <${newChildVNode.name} key=${newKey} ...>, because realNode is null`
-            );
-          }
+          renderNode(
+            realNode as ElementAttachedNeedAttr,
+            childRealNode,
+            oldChildVNode,
+            newChildVNode
+          );
         }
-
         oldChildNowIndex++;
         newChildNowIndex++;
       }
