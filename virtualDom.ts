@@ -263,6 +263,16 @@ const renderNode = (
     let newChildNowIndex = 0;
     const oldChildrenLength = oldVNode.children.length;
     const newChildrenlength = newVNode.children.length;
+
+    // 子要素の追加や削除処理の為にoldVNodeでkeyがある要素の配列が必要な為作成
+    const hasKeyOldChildren = oldVNode.children.filter((VNode) => {
+      if (VNode.key !== null) {
+        return true;
+      } else {
+        false;
+      }
+    });
+
     while (newChildNowIndex <= newChildrenlength) {
       const oldChildVNode = oldVNode.children[oldChildNowIndex];
       const newChildVNode = newVNode.children[newChildNowIndex];
