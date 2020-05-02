@@ -332,6 +332,7 @@ const renderNode = (
             );
           } else {
             const previousRenderValue = hasKeyOldChildren[newKey];
+            // 以前のrender時には既にこのkeyを持つ要素が存在していた場合
             if (
               previousRenderValue !== null ||
               previousRenderValue !== undefined
@@ -343,6 +344,15 @@ const renderNode = (
                 newChildVNode
               );
               renderedNewChildren[newKey] = "isRendered";
+            }
+            // keyを持つ要素の追加処理
+            else {
+              renderNode(
+                realNode as ElementAttachedNeedAttr,
+                oldChildVNode.realNode,
+                null,
+                newChildVNode
+              );
             }
           }
         }
