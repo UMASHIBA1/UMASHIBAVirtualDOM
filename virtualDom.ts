@@ -304,6 +304,7 @@ const renderNode = (
           continue;
         }
 
+        // keyを持っていない子要素の更新処理
         if (newKey === null) {
           if (oldKey === null) {
             renderNode(
@@ -312,7 +313,9 @@ const renderNode = (
               oldChildVNode,
               newChildVNode
             );
+            newChildNowIndex++;
           }
+          oldChildNowIndex++;
         } else {
           // 以前のrender時とkeyが変わっていなかった場合、更新
           if (oldKey === newKey) {
@@ -324,6 +327,7 @@ const renderNode = (
               newChildVNode
             );
             renderedNewChildren[newKey] = "isRendered";
+            oldChildNowIndex++;
           } else {
             const previousRenderValue = hasKeyOldChildren[newKey];
             // 以前のrender時には既にこのkeyを持つ要素が存在していた場合
@@ -350,10 +354,9 @@ const renderNode = (
             }
             renderedNewChildren[newKey] = "isRendered";
           }
-        }
 
-        oldChildNowIndex++;
-        newChildNowIndex++;
+          newChildNowIndex++;
+        }
       }
     } else {
       console.error("renderNode does not work well, because realNode is null.");
