@@ -288,6 +288,22 @@ const renderNode = (
           continue;
         }
 
+        // NOTE keyを持っていない削除するべき要素を削除する処理
+        // ※keyを持っている削除するべき要素は最後にまとめて削除する
+        if (
+          newKey !== null &&
+          newKey === oldChildVNode.children[oldChildNowIndex + 1].key
+        ) {
+          // keyのない要素は以前のrenderの時と同じ位置になかったら削除する
+          if (oldKey === null) {
+            realNode.removeChild(
+              oldChildVNode.realNode as ElementAttachedNeedAttr | Text
+            );
+          }
+          oldChildNowIndex++;
+          continue;
+        }
+
         // 以前のrender時とkeyが変わっていなかった場合、更新
         if (oldKey === newKey) {
           const childRealNode = oldChildVNode.realNode;
