@@ -258,48 +258,52 @@ const renderNode = (
   else {
     // 要素の更新処理本体
     realNode = updateNormalNode(realNode, oldVNode, newVNode);
-    // 子要素の作成削除更新処理
-    let oldChildNowIndex = 0;
-    let newChildNowIndex = 0;
-    const oldChildrenLength = oldVNode.children.length;
-    const newChildrenlength = newVNode.children.length;
+    if (realNode !== null) {
+      // 子要素の作成削除更新処理
+      let oldChildNowIndex = 0;
+      let newChildNowIndex = 0;
+      const oldChildrenLength = oldVNode.children.length;
+      const newChildrenlength = newVNode.children.length;
 
-    // 子要素の追加や削除処理の為にoldVNodeでkeyがある要素の配列が必要な為作成
-    const hasKeyOldChildren = oldVNode.children.filter((VNode) => {
-      if (VNode.key !== null) {
-        return true;
-      } else {
-        false;
-      }
-    });
-    // 同じく子要素の追加や削除処理の為に必要な為作成
-    const existNewChildren: { [key in KeyAttribute]: "isExist" } = {};
-
-    while (newChildNowIndex <= newChildrenlength) {
-      const oldChildVNode = oldVNode.children[oldChildNowIndex];
-      const newChildVNode = newVNode.children[newChildNowIndex];
-      const oldKey = oldChildVNode.key;
-      const newKey = newChildVNode.key;
-
-      // 以前のrender時とkeyが変わっていなかった場合、更新
-      if (oldKey === newKey) {
-        const childRealNode = oldChildVNode.realNode;
-        if (realNode !== null) {
-          renderNode(
-            realNode as ElementAttachedNeedAttr,
-            childRealNode,
-            oldChildVNode,
-            newChildVNode
-          );
+      // 子要素の追加や削除処理の為にoldVNodeでkeyがある要素の配列が必要な為作成
+      const hasKeyOldChildren = oldVNode.children.filter((VNode) => {
+        if (VNode.key !== null) {
+          return true;
         } else {
-          console.error(
-            `Error! renderNode does not work well and failed process <${newChildVNode.name} key=${newKey} ...>, because realNode is null`
-          );
+          false;
         }
-      }
+      });
+      // 同じく子要素の追加や削除処理の為に必要な為作成
+      const existNewChildren: { [key in KeyAttribute]: "isExist" } = {};
 
-      oldChildNowIndex++;
-      newChildNowIndex++;
+      while (newChildNowIndex <= newChildrenlength) {
+        const oldChildVNode = oldVNode.children[oldChildNowIndex];
+        const newChildVNode = newVNode.children[newChildNowIndex];
+        const oldKey = oldChildVNode.key;
+        const newKey = newChildVNode.key;
+
+        // 以前のrender時とkeyが変わっていなかった場合、更新
+        if (oldKey === newKey) {
+          const childRealNode = oldChildVNode.realNode;
+          if (realNode !== null) {
+            renderNode(
+              realNode as ElementAttachedNeedAttr,
+              childRealNode,
+              oldChildVNode,
+              newChildVNode
+            );
+          } else {
+            console.error(
+              `Error! renderNode does not work well and failed process <${newChildVNode.name} key=${newKey} ...>, because realNode is null`
+            );
+          }
+        }
+
+        oldChildNowIndex++;
+        newChildNowIndex++;
+      }
+    } else {
+      console.error("renderNode does not work well, because realNode is null.");
     }
   }
 };
