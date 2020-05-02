@@ -195,7 +195,8 @@ const renderTextNode = (
   }
 };
 
-const updateNormalNode = (
+// 渡された要素は更新するがそのchildrenは更新しない
+const updateOnlyThisNode = (
   realNode: VirtualNodeType["realNode"],
   oldVNode: VirtualNodeType,
   newVNode: VirtualNodeType
@@ -257,7 +258,7 @@ const renderNode = (
   // 要素の更新
   else {
     // 要素の更新処理本体
-    realNode = updateNormalNode(realNode, oldVNode, newVNode);
+    realNode = updateOnlyThisNode(realNode, oldVNode, newVNode);
     if (realNode !== null) {
       // 子要素の作成削除更新処理
       let oldChildNowIndex = 0;
