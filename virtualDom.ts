@@ -304,7 +304,7 @@ const renderNode = (
           // keyのない要素は以前のrenderの時と同じ位置になかったら削除する
           if (oldKey === null) {
             realNode.removeChild(
-              oldChildVNode.realNode as ElementAttachedNeedAttr | Text
+              oldChildVNode.realNode as ElementAttachedNeedAttr
             );
           }
           oldChildNowIndex++;
