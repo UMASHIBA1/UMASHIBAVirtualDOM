@@ -273,13 +273,6 @@ const renderNode = (
           hasKeyOldChildren[childKey] = child;
         }
       }
-      oldVNode.children.filter((VNode) => {
-        if (VNode.key !== null) {
-          return true;
-        } else {
-          false;
-        }
-      });
       // 同じく子要素の追加や削除処理の為に必要な為作成
       const renderedNewChildren: { [key in KeyAttribute]: "isRendered" } = {};
 
