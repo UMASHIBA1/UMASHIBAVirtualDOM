@@ -304,16 +304,28 @@ const renderNode = (
           continue;
         }
 
-        // 以前のrender時とkeyが変わっていなかった場合、更新
-        if (oldKey === newKey) {
-          const childRealNode = oldChildVNode.realNode;
-          renderNode(
-            realNode as ElementAttachedNeedAttr,
-            childRealNode,
-            oldChildVNode,
-            newChildVNode
-          );
+        if (newKey === null) {
+          if (oldKey === null) {
+            renderNode(
+              realNode as ElementAttachedNeedAttr,
+              oldChildVNode.realNode,
+              oldChildVNode,
+              newChildVNode
+            );
+          }
+        } else {
+          // 以前のrender時とkeyが変わっていなかった場合、更新
+          if (oldKey === newKey) {
+            const childRealNode = oldChildVNode.realNode;
+            renderNode(
+              realNode as ElementAttachedNeedAttr,
+              childRealNode,
+              oldChildVNode,
+              newChildVNode
+            );
+          }
         }
+
         oldChildNowIndex++;
         newChildNowIndex++;
       }
