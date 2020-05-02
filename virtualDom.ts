@@ -195,6 +195,40 @@ const renderTextNode = (
   }
 };
 
+const renderNormalNode = (
+  realNode: VirtualNodeType["realNode"],
+  oldVNode: VirtualNodeType,
+  newVNode: VirtualNodeType
+) => {
+  if (realNode !== null) {
+    for (const propName in mergeProperties(oldVNode.props, newVNode.props)) {
+      let compareValue;
+      // inputやcheckbox等の入力系
+      if (propName === "value" || propName === "checked") {
+        compareValue = (realNode as HTMLInputElement)[propName];
+      } else if (propName === "selected") {
+        //型の関係でselectedだけvalue,checkedと別で比較
+        compareValue = (realNode as HTMLOptionElement)[propName];
+      } else {
+        compareValue = oldVNode.props[propName];
+      }
+      if (compareValue !== newVNode.props) {
+        patchProperty(
+          realNode as ElementAttachedNeedAttr,
+          propName,
+          oldVNode.props[propName],
+          newVNode.props[propName]
+        );
+      }
+    }
+  } else {
+    console.error(
+      "Error! renderNormalNode does not work, because realNode is null."
+    );
+  }
+  return realNode;
+};
+
 const renderNode = (
   parentNode: Element,
   realNode: VirtualNodeType["realNode"],
@@ -222,28 +256,8 @@ const renderNode = (
   }
   // 要素の更新
   else {
-    if (realNode !== null) {
-      for (const propName in mergeProperties(oldVNode.props, newVNode.props)) {
-        let compareValue;
-        // inputやcheckbox等の入力系
-        if (propName === "value" || propName === "checked") {
-          compareValue = (realNode as HTMLInputElement)[propName];
-        } else if (propName === "selected") {
-          //型の関係でselectedだけvalue,checkedと別で比較
-          compareValue = (realNode as HTMLOptionElement)[propName];
-        } else {
-          compareValue = oldVNode.props[propName];
-        }
-        if (compareValue !== newVNode.props) {
-          patchProperty(
-            realNode as ElementAttachedNeedAttr,
-            propName,
-            oldVNode.props[propName],
-            newVNode.props[propName]
-          );
-        }
-      }
-    }
+    // 要素の更新処理本体
+    realNode = renderNormalNode(realNode, oldVNode, newVNode);
   }
 };
 
