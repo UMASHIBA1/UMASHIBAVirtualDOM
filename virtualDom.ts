@@ -282,6 +282,12 @@ const renderNode = (
         const oldKey = oldChildVNode.key;
         const newKey = newChildVNode.key;
 
+        // 既にrenderされているoldChildVNodeをスキップする処理
+        if (oldKey !== null && existNewChildren[oldKey] === "isExist") {
+          oldChildNowIndex++;
+          continue;
+        }
+
         // 以前のrender時とkeyが変わっていなかった場合、更新
         if (oldKey === newKey) {
           const childRealNode = oldChildVNode.realNode;
