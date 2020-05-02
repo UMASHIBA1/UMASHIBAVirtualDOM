@@ -330,6 +330,20 @@ const renderNode = (
               oldChildVNode,
               newChildVNode
             );
+          } else {
+            const previousRenderValue = hasKeyOldChildren[newKey];
+            if (
+              previousRenderValue !== null ||
+              previousRenderValue !== undefined
+            ) {
+              renderNode(
+                realNode as ElementAttachedNeedAttr,
+                previousRenderValue.realNode,
+                previousRenderValue,
+                newChildVNode
+              );
+              renderedNewChildren[newKey] = "isRendered";
+            }
           }
         }
 
