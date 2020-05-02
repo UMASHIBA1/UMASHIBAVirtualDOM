@@ -1,6 +1,6 @@
 type TEXT_NODE = 3;
 
-type KeyAttribute = string | number | null;
+type KeyAttribute = string | number;
 
 type DOMAttributeName = "key" | string;
 // propにはkeyとoninputやclass、id等のHTMLElementもしくはSVGElementの属性の名前が入ります
@@ -27,7 +27,7 @@ interface VirtualNodeType {
   children: VirtualNodeType[];
   realNode: ExpandElement | null;
   nodeType: TEXT_NODE | null;
-  key: KeyAttribute;
+  key: KeyAttribute | null;
 }
 
 const TEXT_NODE = 3;
