@@ -258,6 +258,37 @@ const renderNode = (
   else {
     // 要素の更新処理本体
     realNode = updateNormalNode(realNode, oldVNode, newVNode);
+    // 子要素の作成削除更新処理
+    let oldChildNowIndex = 0;
+    let newChildNowIndex = 0;
+    const oldChildrenLength = oldVNode.children.length;
+    const newChildrenlength = newVNode.children.length;
+    while (newChildNowIndex <= newChildrenlength) {
+      const oldChildVNode = oldVNode.children[oldChildNowIndex];
+      const newChildVNode = newVNode.children[newChildNowIndex];
+      const oldKey = oldChildVNode.key;
+      const newKey = newChildVNode.key;
+
+      // 以前のrender時とkeyが変わっていなかった場合、更新
+      if (oldKey === newKey) {
+        const childRealNode = oldChildVNode.realNode;
+        if (realNode !== null) {
+          renderNode(
+            realNode as ElementAttachedNeedAttr,
+            childRealNode,
+            oldChildVNode,
+            newChildVNode
+          );
+        } else {
+          console.error(
+            `Error! renderNode does not work well and failed process <${newChildVNode.name} key=${newKey} ...>, because realNode is null`
+          );
+        }
+      }
+
+      oldChildNowIndex++;
+      newChildNowIndex++;
+    }
   }
 };
 
