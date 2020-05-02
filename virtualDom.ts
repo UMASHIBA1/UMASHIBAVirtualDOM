@@ -274,7 +274,7 @@ const renderNode = (
         }
       });
       // 同じく子要素の追加や削除処理の為に必要な為作成
-      const existNewChildren: { [key in KeyAttribute]: "isExist" } = {};
+      const renderedNewChildren: { [key in KeyAttribute]: "isRendered" } = {};
 
       while (newChildNowIndex <= newChildrenlength) {
         const oldChildVNode = oldVNode.children[oldChildNowIndex];
@@ -283,7 +283,7 @@ const renderNode = (
         const newKey = newChildVNode.key;
 
         // 既にrenderされているoldChildVNodeをスキップする処理
-        if (oldKey !== null && existNewChildren[oldKey] === "isExist") {
+        if (oldKey !== null && renderedNewChildren[oldKey] === "isRendered") {
           oldChildNowIndex++;
           continue;
         }
