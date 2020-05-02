@@ -220,6 +220,31 @@ const renderNode = (
       parentNode.removeChild(oldVNode.realNode);
     }
   }
+  // 要素の更新
+  else {
+    if (realNode !== null) {
+      for (const propName in mergeProperties(oldVNode.props, newVNode.props)) {
+        let compareValue;
+        // inputやcheckbox等の入力系
+        if (propName === "value" || propName === "checked") {
+          compareValue = (realNode as HTMLInputElement)[propName];
+        } else if (propName === "selected") {
+          //型の関係でselectedだけvalue,checkedと別で比較
+          compareValue = (realNode as HTMLOptionElement)[propName];
+        } else {
+          compareValue = oldVNode.props[propName];
+        }
+        if (compareValue !== newVNode.props) {
+          patchProperty(
+            realNode as ElementAttachedNeedAttr,
+            propName,
+            oldVNode.props[propName],
+            newVNode.props[propName]
+          );
+        }
+      }
+    }
+  }
 };
 
 export const render = (
