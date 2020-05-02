@@ -195,7 +195,7 @@ const renderTextNode = (
   }
 };
 
-const renderNormalNode = (
+const updateNormalNode = (
   realNode: VirtualNodeType["realNode"],
   oldVNode: VirtualNodeType,
   newVNode: VirtualNodeType
@@ -257,7 +257,7 @@ const renderNode = (
   // 要素の更新
   else {
     // 要素の更新処理本体
-    realNode = renderNormalNode(realNode, oldVNode, newVNode);
+    realNode = updateNormalNode(realNode, oldVNode, newVNode);
   }
 };
 
