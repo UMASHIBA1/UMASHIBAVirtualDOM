@@ -11,7 +11,7 @@ const setState = (state: string) => {
     render(
       node,
       h("div", {}, [
-        h("h1", {}, [state]),
+        h("h1", {}, [state]), //タダの文字を表したい場合はh関数のchildrenに文字のみ渡す
         h(
           "input",
           {

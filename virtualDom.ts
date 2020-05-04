@@ -395,9 +395,9 @@ export const render = (
   newVNode: VirtualNodeType
 ) => {
   if (realNode.parentElement !== null) {
-    let oldVNode: VirtualNodeType;
+    let oldVNode: VirtualNodeType | null;
     if (realNode.vdom === undefined) {
-      oldVNode = createVNodeFromRealElement(realNode);
+      oldVNode = null;
     } else {
       oldVNode = realNode.vdom;
     }
