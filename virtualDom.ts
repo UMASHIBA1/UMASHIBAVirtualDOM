@@ -386,6 +386,8 @@ const renderNode = (
       console.error("renderNode does not work well, because realNode is null.");
     }
   }
+
+  return realNode;
 };
 
 export const render = (
@@ -400,7 +402,15 @@ export const render = (
       oldVNode = realNode.vdom;
     }
 
-    renderNode(realNode.parentElement, realNode, oldVNode, newVNode);
+    const renderedRealNode = renderNode(
+      realNode.parentElement,
+      realNode,
+      oldVNode,
+      newVNode
+    );
+    if (renderedRealNode !== null) {
+      (renderedRealNode as ElementAttachedNeedAttr).vdom = newVNode;
+    }
   } else {
     console.error(
       "Error! render does not work, because the realNode does not have parentNode attribute."
