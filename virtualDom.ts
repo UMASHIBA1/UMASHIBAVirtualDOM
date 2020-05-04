@@ -411,7 +411,7 @@ export const render = (
 export const h = (
   name: VirtualNodeType["name"],
   props: VirtualNodeType["props"],
-  children: VirtualNodeType["children"],
+  children: (VirtualNodeType | string)[],
   realNode?: VirtualNodeType["realNode"]
 ) => {
   const VNodeChildren: VirtualNodeType[] = [];
