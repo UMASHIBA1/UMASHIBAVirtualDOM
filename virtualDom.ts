@@ -150,10 +150,12 @@ const patchProperty = (
 
 // FIXME isSVG等のフラグを追加してSVGも作成できるようにする
 const createRealNodeFromVNode = (VNode: VirtualNodeType) => {
-  let realNode: Element | Text;
+  let realNode: ElementAttachedNeedAttr | TextAttachedVDom;
   if (VNode.nodeType === TEXT_NODE) {
     if (typeof VNode.name === "string") {
       realNode = document.createTextNode(VNode.name);
+      VNode.realNode = realNode;
+      realNode.vdom = VNode;
     } else {
       console.error(
         "Error! createRealNodeFromVNode does not work, because rendering nodeType is TEXT_NODE, but VNode.name is not string"
@@ -166,6 +168,8 @@ const createRealNodeFromVNode = (VNode: VirtualNodeType) => {
     for (const propName in VNode.props) {
       patchProperty(realNode, propName, null, VNode.props[propName]);
     }
+    VNode.realNode = realNode;
+    realNode.vdom = VNode;
 
     for (const child of VNode.children) {
       const realChildNode = createRealNodeFromVNode(child);
