@@ -369,6 +369,19 @@ const renderNode = (
           }
         }
       }
+
+      // keyをもつoldVNodeの子要素の中で新しいVNodeでは削除されているものを削除
+      for (const oldKey in hasKeyOldChildren) {
+        if (
+          renderedNewChildren[oldKey] === null ||
+          renderedNewChildren[oldKey] === undefined
+        ) {
+          const willRemoveNode = hasKeyOldChildren[oldKey].realNode;
+          if (willRemoveNode !== null) {
+            realNode.removeChild(willRemoveNode);
+          }
+        }
+      }
     } else {
       console.error("renderNode does not work well, because realNode is null.");
     }
