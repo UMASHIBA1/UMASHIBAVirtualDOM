@@ -224,7 +224,7 @@ const updateOnlyThisNode = (
     }
   } else {
     console.error(
-      "Error! renderNormalNode does not work, because realNode is null."
+      "Error! updateOnlyThisNode does not work, because realNode is null."
     );
   }
   return realNode;
