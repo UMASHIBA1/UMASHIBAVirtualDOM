@@ -19,7 +19,11 @@ type ElementAttachedNeedAttr = Element & {
   eventHandlers?: HandlersType; //handlersにイベントを入れておいてoninput等のイベントを管理する
 };
 
-type ExpandElement = ElementAttachedNeedAttr | Text;
+type TextAttachedVDom = Text & {
+  vdom?: VirtualNodeType;
+};
+
+type ExpandElement = ElementAttachedNeedAttr | TextAttachedVDom;
 
 interface VirtualNodeType {
   name: ElementTagNameMap | string;
