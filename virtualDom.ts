@@ -359,6 +359,16 @@ const renderNode = (
           newChildNowIndex++;
         }
       }
+
+      // 前のwhile処理で利用されなかった到達しなかったoldVNodeのindexの内keyを持っていないモノを削除
+      while (oldChildNowIndex <= oldChildrenLength) {
+        const unreachOldVNode = oldVNode.children[oldChildNowIndex];
+        if (unreachOldVNode.key === null || unreachOldVNode.key === undefined) {
+          if (unreachOldVNode.realNode !== null) {
+            realNode.removeChild(unreachOldVNode.realNode);
+          }
+        }
+      }
     } else {
       console.error("renderNode does not work well, because realNode is null.");
     }
