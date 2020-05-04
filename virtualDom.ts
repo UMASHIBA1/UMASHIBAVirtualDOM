@@ -188,6 +188,8 @@ const renderTextNode = (
   if (realNode !== null) {
     if (typeof newVNode.name === "string") {
       realNode.nodeValue = newVNode.name;
+      newVNode.realNode = realNode;
+      realNode.vdom = newVNode;
       return realNode;
     } else {
       console.error(
