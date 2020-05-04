@@ -232,7 +232,9 @@ const updateOnlyThisNode = (
     }
   } else {
     console.error(
-      "Error! updateOnlyThisNode does not work, because realNode is null."
+      `Error! updateOnlyThisNode does not work, because realNode is null.\n
+      [info]: oldVNode.name: ${oldVNode.name}, newVNode.name: ${newVNode.name}
+      `
     );
   }
   return realNode;
