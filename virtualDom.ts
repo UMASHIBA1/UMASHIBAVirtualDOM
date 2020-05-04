@@ -419,6 +419,7 @@ export const render = (
       newVNode
     );
     if (renderedRealNode !== null) {
+      newVNode.realNode = renderedRealNode;
       (renderedRealNode as ElementAttachedNeedAttr).vdom = newVNode;
     }
   } else {
