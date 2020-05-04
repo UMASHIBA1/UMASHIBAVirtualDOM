@@ -27,3 +27,5 @@ const setState = (state: string) => {
     );
   }
 };
+
+setState("Hello");
