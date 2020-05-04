@@ -239,6 +239,10 @@ const updateOnlyThisNode = (
       `
     );
   }
+  newVNode.realNode = realNode;
+  if (realNode !== null) {
+    realNode.vdom = newVNode;
+  }
   return realNode;
 };
 
