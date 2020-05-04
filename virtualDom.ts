@@ -248,7 +248,7 @@ const renderNode = (
   else if (oldVNode === null || oldVNode.name !== newVNode.name) {
     const newRealNode = createRealNodeFromVNode(newVNode);
     if (newRealNode !== null) {
-      realNode = parentNode.insertBefore(newRealNode, realNode);
+      parentNode.insertBefore(newRealNode, realNode);
     }
 
     if (oldVNode !== null && oldVNode.realNode !== null) {
