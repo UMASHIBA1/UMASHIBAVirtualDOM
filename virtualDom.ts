@@ -294,9 +294,16 @@ const renderNode = (
       const renderedNewChildren: { [key in KeyAttribute]: "isRendered" } = {};
 
       while (newChildNowIndex < newChildrenlength) {
-        const oldChildVNode = oldVNode.children[oldChildNowIndex];
+        let oldChildVNode: VirtualNodeType | null;
+        let oldKey: string | number | null;
+        if (oldVNode.children[oldChildNowIndex] === undefined) {
+          oldChildVNode = null;
+          oldKey = null;
+        } else {
+          oldChildVNode = oldVNode.children[oldChildNowIndex];
+          oldKey = oldChildVNode.key;
+        }
         const newChildVNode = newVNode.children[newChildNowIndex];
-        const oldKey = oldChildVNode.key;
         const newKey = newChildVNode.key;
 
         // 既にrenderされているoldChildVNodeをスキップする処理
@@ -309,6 +316,7 @@ const renderNode = (
         // ※keyを持っている削除するべき要素は最後にまとめて削除する
         if (
           newKey !== null &&
+          oldChildVNode !== null &&
           oldChildVNode.children[oldChildNowIndex + 1] !== undefined &&
           newKey === oldChildVNode.children[oldChildNowIndex + 1].key
         ) {
@@ -324,7 +332,7 @@ const renderNode = (
 
         // keyを持っていない子要素の更新処理
         if (newKey === null) {
-          if (oldKey === null) {
+          if (oldChildVNode !== null && oldKey === null) {
             renderNode(
               realNode as ElementAttachedNeedAttr,
               oldChildVNode.realNode,
@@ -336,7 +344,7 @@ const renderNode = (
           oldChildNowIndex++;
         } else {
           // 以前のrender時とkeyが変わっていなかった場合、更新
-          if (oldKey === newKey) {
+          if (oldChildVNode !== null && oldKey === newKey) {
             const childRealNode = oldChildVNode.realNode;
             renderNode(
               realNode as ElementAttachedNeedAttr,
@@ -365,7 +373,7 @@ const renderNode = (
             else {
               renderNode(
                 realNode as ElementAttachedNeedAttr,
-                oldChildVNode.realNode,
+                null,
                 null,
                 newChildVNode
               );
