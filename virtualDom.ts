@@ -163,7 +163,6 @@ const createRealNodeFromVNode = (VNode: VirtualNodeType) => {
       return null;
     }
   } else {
-    // FIXME createElementは受け取る引数の型が決まっていているが結構適当にstring型で渡してしまった。後でcreateElementの受け取る型について調べて直す
     realNode = document.createElement(VNode.name as string);
     for (const propName in VNode.props) {
       patchProperty(realNode, propName, null, VNode.props[propName]);
