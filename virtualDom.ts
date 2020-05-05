@@ -358,7 +358,7 @@ const renderNode = (
             const previousRenderValue = hasKeyOldChildren[newKey];
             // 以前のrender時には既にこのkeyを持つ要素が存在していた場合
             if (
-              previousRenderValue !== null ||
+              previousRenderValue !== null &&
               previousRenderValue !== undefined
             ) {
               renderNode(
