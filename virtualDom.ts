@@ -14,7 +14,7 @@ interface HandlersType {
   [eventName: string]: (event: Event) => void;
 }
 
-type ElementAttachedNeedAttr = Element & {
+type ElementAttachedNeedAttr = HTMLElement & {
   vdom?: VirtualNodeType;
   eventHandlers?: HandlersType; //handlersにイベントを入れておいてoninput等のイベントを管理する
 };
@@ -26,7 +26,7 @@ type TextAttachedVDom = Text & {
 type ExpandElement = ElementAttachedNeedAttr | TextAttachedVDom;
 
 interface VirtualNodeType {
-  name: ElementTagNameMap | string;
+  name: HTMLElementTagNameMap | string;
   props: DOMAttributes;
   children: VirtualNodeType[];
   realNode: ExpandElement | null;
@@ -62,7 +62,9 @@ const createTextVNode = (
 };
 
 // 初期render時に本物のElementからVNodeを作成するための関数
-const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
+const createVNodeFromRealElement = (
+  realElement: HTMLElement
+): VirtualNodeType => {
   if (realElement.nodeType === TEXT_NODE) {
     return createTextVNode(realElement.nodeName, realElement);
   } else {
@@ -71,7 +73,7 @@ const createVNodeFromRealElement = (realElement: Element): VirtualNodeType => {
     for (let i = 0; i < childrenLength; i++) {
       const child = realElement.children.item(i);
       if (child !== null) {
-        const childVNode = createVNodeFromRealElement(child);
+        const childVNode = createVNodeFromRealElement(child as HTMLElement);
         VNodeChildren.push(childVNode);
       }
     }
@@ -110,7 +112,6 @@ const listenerFunc = (event: Event) => {
   }
 };
 
-// FIXME SVG系の処理を入れる
 const patchProperty = (
   realNode: ElementAttachedNeedAttr,
   propName: DOMAttributeName,
@@ -148,7 +149,6 @@ const patchProperty = (
   }
 };
 
-// FIXME isSVG等のフラグを追加してSVGも作成できるようにする
 const createRealNodeFromVNode = (VNode: VirtualNodeType) => {
   let realNode: ElementAttachedNeedAttr | TextAttachedVDom;
   if (VNode.nodeType === TEXT_NODE) {
@@ -247,7 +247,7 @@ const updateOnlyThisNode = (
 };
 
 const renderNode = (
-  parentNode: Element,
+  parentNode: HTMLElement,
   realNode: VirtualNodeType["realNode"],
   oldVNode: VirtualNodeType | null,
   newVNode: VirtualNodeType
