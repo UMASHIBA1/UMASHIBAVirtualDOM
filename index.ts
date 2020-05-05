@@ -6,6 +6,11 @@ interface HTMLElementEvent<T extends HTMLElement> extends Event {
 
 const setState = (state: string) => {
   const node = document.getElementById("app");
+  const createKeyList = () => {
+    return state.split("").map((value: string) => {
+      return h("div", { key: value }, [`${value}`]);
+    });
+  };
 
   if (node !== null) {
     render(
@@ -23,9 +28,10 @@ const setState = (state: string) => {
           },
           []
         ),
+        h("div", { id: "container" }, createKeyList()),
       ])
     );
   }
 };
 
-setState("Hello");
+setState("Hey");
