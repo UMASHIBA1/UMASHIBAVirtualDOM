@@ -309,6 +309,7 @@ const renderNode = (
         // ※keyを持っている削除するべき要素は最後にまとめて削除する
         if (
           newKey !== null &&
+          oldChildVNode.children[oldChildNowIndex + 1] !== undefined &&
           newKey === oldChildVNode.children[oldChildNowIndex + 1].key
         ) {
           // keyのない要素は以前のrenderの時と同じ位置になかったら削除する
