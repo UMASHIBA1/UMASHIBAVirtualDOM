@@ -393,6 +393,7 @@ const renderNode = (
             realNode.removeChild(unreachOldVNode.realNode);
           }
         }
+        oldChildNowIndex++;
       }
 
       // keyをもつoldVNodeの子要素の中で新しいVNodeでは削除されているものを削除
