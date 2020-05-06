@@ -3,7 +3,7 @@ type TEXT_NODE = 3;
 type KeyAttribute = string | number;
 
 type DOMAttributeName = "key" | string;
-// propにはkeyとoninputやclass、id等のHTMLElementもしくはSVGElementの属性の名前が入ります
+// propにはkeyやonclick、class、id等のHTMLElementの属性の名前が入ります
 interface DOMAttributes {
   key?: KeyAttribute;
   [prop: string]: any;
@@ -26,12 +26,12 @@ type TextAttachedVDom = Text & {
 type ExpandElement = ElementAttachedNeedAttr | TextAttachedVDom;
 
 interface VirtualNodeType {
-  name: HTMLElementTagNameMap | string;
-  props: DOMAttributes;
-  children: VirtualNodeType[];
-  realNode: ExpandElement | null;
-  nodeType: TEXT_NODE | null;
-  key: KeyAttribute | null;
+  name: HTMLElementTagNameMap | string; // divやh1等の場合はHTMLElementTagNameMap、文字を表すVNodeの場合はstring型
+  props: DOMAttributes; //HTML要素の属性
+  children: VirtualNodeType[]; //子要素のVNodeのリスト
+  realNode: ExpandElement | null; //実際の要素への参照
+  nodeType: TEXT_NODE | null; // このVNodeのタイプ(文字を表すノードなのか要素を表すノードなのか)
+  key: KeyAttribute | null; //keyを表す
 }
 
 const TEXT_NODE = 3;
