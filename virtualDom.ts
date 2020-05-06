@@ -1,3 +1,5 @@
+// 型の定義
+
 type TEXT_NODE = 3;
 
 type KeyAttribute = string | number;
@@ -33,6 +35,8 @@ interface VirtualNodeType {
   nodeType: TEXT_NODE | null; // このVNodeのタイプ(文字を表すノードなのか要素を表すノードなのか)
   key: KeyAttribute | null; //keyを表す
 }
+
+// -------------------------型の定義ここまで-----------------------------
 
 const TEXT_NODE = 3;
 
@@ -421,6 +425,7 @@ export const render = (
 ) => {
   if (realNode.parentElement !== null) {
     let oldVNode: VirtualNodeType | null;
+    // NOTE realNode.vdomがあった場合はoldVNodeにそれをいれる。oldVNodeは更新の際の差分検出処理に使う
     if (realNode.vdom === undefined) {
       oldVNode = null;
     } else {
@@ -434,12 +439,15 @@ export const render = (
       newVNode
     );
     if (renderedRealNode !== null) {
+      // NOTE newVNodeに対応する実際の要素を代入する。これを次の更新の際に使う
       newVNode.realNode = renderedRealNode;
+      // NOTE 今後更新する際に差分を検出する為実際のHTML要素に対してvdomプロパティを加える
+      // このvdomプロパティが次の更新の際のoldVNodeになる
       (renderedRealNode as ElementAttachedNeedAttr).vdom = newVNode;
     }
   } else {
     console.error(
-      "Error! render does not work, because the realNode does not have parentNode attribute."
+      "Error! render func does not work, because the realNode does not have parentNode attribute."
     );
   }
 };
