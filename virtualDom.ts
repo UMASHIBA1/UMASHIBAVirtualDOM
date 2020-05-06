@@ -263,7 +263,7 @@ const renderNode = (
   ) {
     realNode = renderTextNode(realNode, newVNode);
   }
-  // 要素の追加、削除、もしくは<div>から<span>等、要素自体を変えた時の入れ替え処理
+  // 要素の追加、削除、もしくは<div>から<span>等、要素の種類自体を変えた時の入れ替え処理
   else if (oldVNode === null || oldVNode.name !== newVNode.name) {
     const newRealNode = createRealNodeFromVNode(newVNode);
     if (newRealNode !== null) {
