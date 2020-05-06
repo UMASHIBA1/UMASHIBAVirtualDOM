@@ -5,7 +5,7 @@ interface HTMLElementEvent<T extends HTMLElement> extends Event {
 }
 
 const setState = (state: string) => {
-  const node = document.getElementById("app");
+  const node = document.getElementById("app-container");
   const createKeyList = () => {
     return state.split(" ").map((value: string) => {
       return h("div", { key: value }, [`key: ${value}`]);
