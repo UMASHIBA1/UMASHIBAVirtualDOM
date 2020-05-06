@@ -416,6 +416,14 @@ const renderNode = (
     }
   }
 
+  if (realNode !== null) {
+    // NOTE newVNodeに対応する実際の要素を代入する。これを次の更新の際に使う
+    newVNode.realNode = realNode;
+    // NOTE 今後更新する際に差分を検出する為実際のHTML要素に対してvdomプロパティを加える
+    // このvdomプロパティが次の更新の際のoldVNodeになる
+    realNode.vdom = newVNode;
+  }
+
   return realNode;
 };
 
@@ -432,19 +440,7 @@ export const render = (
       oldVNode = realNode.vdom;
     }
 
-    const renderedRealNode = renderNode(
-      realNode.parentElement,
-      realNode,
-      oldVNode,
-      newVNode
-    );
-    if (renderedRealNode !== null) {
-      // NOTE newVNodeに対応する実際の要素を代入する。これを次の更新の際に使う
-      newVNode.realNode = renderedRealNode;
-      // NOTE 今後更新する際に差分を検出する為実際のHTML要素に対してvdomプロパティを加える
-      // このvdomプロパティが次の更新の際のoldVNodeになる
-      (renderedRealNode as ElementAttachedNeedAttr).vdom = newVNode;
-    }
+    renderNode(realNode.parentElement, realNode, oldVNode, newVNode);
   } else {
     console.error(
       "Error! render func does not work, because the realNode does not have parentNode attribute."
