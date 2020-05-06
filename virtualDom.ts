@@ -158,6 +158,8 @@ const createRealNodeFromVNode = (VNode: VirtualNodeType) => {
   if (VNode.nodeType === TEXT_NODE) {
     if (typeof VNode.name === "string") {
       realNode = document.createTextNode(VNode.name);
+      // NOTE 要素を新しく作成する場合はchildrenに対してcreateRealNodeFromVNodeを再帰的に
+      // 呼んでいる関係でここでVNodeとrealNodeの相互参照を作成する
       VNode.realNode = realNode;
       realNode.vdom = VNode;
     } else {
@@ -171,6 +173,8 @@ const createRealNodeFromVNode = (VNode: VirtualNodeType) => {
     for (const propName in VNode.props) {
       patchProperty(realNode, propName, null, VNode.props[propName]);
     }
+    // NOTE 要素を新しく作成する場合はchildrenに対してcreateRealNodeFromVNodeを再帰的に
+    // 呼んでいる関係でここでVNodeとrealNodeの相互参照を作成する
     VNode.realNode = realNode;
     realNode.vdom = VNode;
 
@@ -191,8 +195,6 @@ const renderTextNode = (
   if (realNode !== null) {
     if (typeof newVNode.name === "string") {
       realNode.nodeValue = newVNode.name;
-      newVNode.realNode = realNode;
-      realNode.vdom = newVNode;
       return realNode;
     } else {
       console.error(
@@ -241,10 +243,6 @@ const updateOnlyThisNode = (
       [info]: oldVNode.name: ${oldVNode.name}, newVNode.name: ${newVNode.name}
       `
     );
-  }
-  newVNode.realNode = realNode;
-  if (realNode !== null) {
-    realNode.vdom = newVNode;
   }
   return realNode;
 };
