@@ -397,7 +397,7 @@ const renderNode = (
         }
       }
 
-      // 前のwhile処理で利用されなかった到達しなかったoldVNodeのindexの内keyを持っていないモノを削除
+      // 前のwhile処理で利用されなかった到達しなかった子要素のindexのうちkeyを持っていないモノを削除
       while (oldChildNowIndex < oldChildrenLength) {
         const unreachOldVNode = oldVNode.children[oldChildNowIndex];
         if (unreachOldVNode.key === null || unreachOldVNode.key === undefined) {
