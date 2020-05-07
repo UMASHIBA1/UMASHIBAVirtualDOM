@@ -343,10 +343,10 @@ const renderNode = (
 
         // keyを持っていない子要素の更新処理
         if (newKey === null) {
-          if (oldChildVNode !== null && oldKey === null) {
+          if (oldKey === null) {
             renderNode(
               realNode as ElementAttachedNeedAttr,
-              oldChildVNode.realNode,
+              oldChildVNode === null ? null : oldChildVNode.realNode,
               oldChildVNode,
               newChildVNode
             );
@@ -441,12 +441,17 @@ export const render = (
 ) => {
   if (realNode.parentElement !== null) {
     let oldVNode: VirtualNodeType | null;
-    // NOTE realNode.vdomがあった場合はoldVNodeにそれをいれる。oldVNodeは更新の際の差分検出処理に使う
+
+    // realNodeごと追加更新削除処理につっこむ！
+    const vnodeFromRealElement = createVNodeFromRealElement(realNode);
     if (realNode.vdom === undefined) {
-      oldVNode = null;
+      oldVNode = { ...vnodeFromRealElement };
     } else {
       oldVNode = realNode.vdom;
     }
+
+    vnodeFromRealElement.children = [newVNode];
+    newVNode = vnodeFromRealElement;
 
     renderNode(realNode.parentElement, realNode, oldVNode, newVNode);
   } else {
