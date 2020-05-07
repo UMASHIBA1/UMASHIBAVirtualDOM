@@ -82,9 +82,19 @@ const createVNodeFromRealElement = (
       }
     }
 
+    const props: VirtualNodeType["props"] = {};
+    if (realElement.hasAttributes()) {
+      const attributes = realElement.attributes;
+      const attrLength = attributes.length;
+      for (let i = 0; i < attrLength; i++) {
+        const { name, value } = attributes[i];
+        props[name] = value;
+      }
+    }
+
     const VNode = createVNode(
       realElement.nodeName.toLowerCase(),
-      {},
+      props,
       VNodeChildren,
       realElement,
       null
