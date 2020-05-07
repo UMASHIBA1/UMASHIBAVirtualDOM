@@ -294,13 +294,14 @@ const renderNode = (
       const newChildrenlength = newVNode.children.length;
 
       // 子要素の追加や削除処理の為にoldVNodeでkeyがある要素の連想配列が必要な為作成
+      // NOTE keyを持つoldVNodeをすべて保存している
       let hasKeyOldChildren: { [key in KeyAttribute]: VirtualNodeType } = {};
       for (const child of oldVNode.children) {
         const childKey = child.key;
         if (childKey !== null) {
           hasKeyOldChildren[childKey] = child;
         }
-      }
+      } // NOTE keyを持つnewVNodeで既に更新されたものはこちらのオブジェクトで記録されている。
       // 同じく子要素の追加や削除処理の為に必要な為作成
       const renderedNewChildren: { [key in KeyAttribute]: "isRendered" } = {};
 
