@@ -65,7 +65,7 @@ const createTextVNode = (
   return createVNode(name, {}, [], realNode, TEXT_NODE);
 };
 
-// 初期render時に本物のElementからVNodeを作成するための関数
+// 本物のElementからVNodeを作成するための関数
 const createVNodeFromRealElement = (
   realElement: HTMLElement
 ): VirtualNodeType => {
