@@ -1,5 +1,8 @@
 # UMASHIBAVirtualDOM
 This is virtual dom for studying
+以下のURLにて実装を解説しています。
+https://qiita.com/umashiba/items/e2a9776e6c44a40d2d8f
+
 ## Usage 使い方
 
 ```
